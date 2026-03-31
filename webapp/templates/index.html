@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroScan AI — Brain Tumor Analysis</title>
+    <meta name="description" content="AI-powered brain tumor classification and segmentation from MRI scans using deep learning">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>NeuroScan AI</h1>
+            <p>Brain Tumor Analysis Platform</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Upload Section -->
+            <section id="uploadSection" class="card">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <h2>Upload Brain MRI Scan</h2>
+                    <p>Click here or drag and drop an image</p>
+                    <p class="upload-hint">Supports JPG, PNG, BMP (Max 10MB)</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <button class="btn btn-primary" id="browseBtn" style="margin-top: 15px;">Choose File</button>
+                </div>
+                
+                <!-- Preview -->
+                <div class="preview-container" id="previewContainer" style="display: none;">
+                    <img id="previewImage" alt="Preview">
+                    <div class="preview-actions">
+                        <button class="btn btn-primary" id="analyzeBtn">
+                            <span class="btn-text">Analyze Scan</span>
+                            <span class="btn-loader" style="display: none;">
+                                <div class="spinner"></div> Analyzing...
+                            </span>
+                        </button>
+                        <button class="btn btn-secondary" id="clearBtn">Clear</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>Analysis Results</h2>
+                    <button class="btn btn-secondary" id="newScanBtn">New Scan</button>
+                </div>
+
+                <div class="results-grid">
+                    <!-- Main Result Card -->
+                    <div class="card result-main" id="classificationResult">
+                        <span class="result-badge" id="severityBadge"></span>
+                        <h3 id="tumorType">Analyzing...</h3>
+                        <div class="confidence-bar-container">
+                            <div class="confidence-bar-fill" id="confidenceFill">0%</div>
+                        </div>
+                        <p id="tumorDescription"></p>
+                    </div>
+
+                    <!-- Probability Bars -->
+                    <div class="card probabilities-card" id="probabilitiesCard">
+                        <h3>Class Probabilities</h3>
+                        <div id="probBars"></div>
+                    </div>
+
+                    <!-- Original Image -->
+                    <div class="card image-card">
+                        <h3>Original MRI</h3>
+                        <div class="image-frame">
+                            <img id="resultOriginal" alt="Original MRI">
+                        </div>
+                    </div>
+
+                    <!-- GradCAM -->
+                    <div class="card image-card" id="gradcamCard">
+                        <h3>GradCAM Heatmap</h3>
+                        <div class="image-frame">
+                            <img id="resultGradcam" alt="GradCAM overlay">
+                        </div>
+                        <p class="image-caption">Regions influencing prediction</p>
+                    </div>
+
+                    <!-- Segmentation -->
+                    <div class="card image-card" id="segmentationCard">
+                        <h3>Segmentation Mask</h3>
+                        <div class="image-frame">
+                            <img id="resultSegmentation" alt="Segmentation overlay">
+                        </div>
+                        <div class="seg-stats">
+                            Tumor Area: <strong id="tumorArea">--%</strong>
+                        </div>
+                    </div>
+
+                    <!-- Segmentation Overlay -->
+                    <div class="card image-card" id="segOverlayCard">
+                        <h3>Tumor Overlay</h3>
+                        <div class="image-frame">
+                            <img id="resultSegOverlay" alt="Segmentation overlay on MRI">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>NeuroScan AI — Powered by TensorFlow & Deep Learning | For Research Purposes Only</p>
+        </footer>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
